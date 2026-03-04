@@ -32,7 +32,7 @@ public interface List<E> {
      * @param i index of the element
      * @return the element
      */
-    public Node<E>  get(int i) throws IndexOutOfBoundsException;
+    public E get(int i) throws IndexOutOfBoundsException;
 
     /**
      * Sets the element at i to a new value

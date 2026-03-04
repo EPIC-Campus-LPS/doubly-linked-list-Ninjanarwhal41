@@ -37,18 +37,16 @@ public class DoublyLinkedList<E> implements List{
         Node<E> current = head;
         int pos = 0;
         while(current.getNextNode() != null){
+            current = current.getNextNode();
             pos++;
             if(pos == i){
-                current.setNextNode(temp);
-                temp.setPreviousNode(current);
-                current.setNextNode(temp);
-                temp.setPreviousNode(current);
                 break;
             }
         }
-
-
-
+        temp.setNextNode(current);
+        temp.setPreviousNode(current.getPreviousNode());
+        current.getPreviousNode().setNextNode(temp);
+        current.setPreviousNode(temp);
     }
 
     /**
@@ -56,38 +54,61 @@ public class DoublyLinkedList<E> implements List{
      */
     @Override
     public Object remove() {
-        if (tail == null){
+        if (head == null){
             return null;
         }
-
-        if (head == tail){
+        if(head.getNextNode() == null){
             head = null;
-            tail = null;
-            return null;
         }
+        Node<E> current = head.getNextNode();
+        while (current.getNextNode() != null){
+            current = current.getNextNode();
+        }
+        current.getPreviousNode().setNextNode(null);
 
-        Node<E> temp = tail;
-        tail.setValue(tail.getPreviousNode().getValue());
-        tail.setNextNode(null);
-        return temp;
+        return current.getValue();
     }
 
 
     @Override
     public Object remove(int i) throws IndexOutOfBoundsException {
-        return null;
+        if (head == null){
+            return null;
+        }
+        Node<E> current = head.getNextNode();
+        for(int j = 0; j < i; j++){
+            if (current.getNextNode() == null){
+                break;
+            }
+            current = current.getNextNode();
+        }
+        if (current.getPreviousNode() != null){
+            current.getPreviousNode().setNextNode(null);
+
+        }
+        return current.getValue();
     }
 
     @Override
-    public Node<E> get(int i) throws IndexOutOfBoundsException {
-
-        return null;
+    public E get(int i) throws IndexOutOfBoundsException {
+        Node<E> current = head;
+        for (int j = 0; j < i; j++){
+            if (current.getNextNode() == null){
+                break;
+            }
+            current = current.getNextNode();
+        }
+        return current.getValue();
     }
 
     @Override
     public void set(int i, Object element) throws IndexOutOfBoundsException {
-
-
+        int pos = 0;
+        Node<E> current = head;
+        for (int j = 0; j < i; j++){
+            current = current.getNextNode();
+        }
+        current.setValue((E) element);
     }
 
     @Override
@@ -115,7 +136,7 @@ public class DoublyLinkedList<E> implements List{
 
         }
 
-        return "[" + str + "]";
+        return "[" + str.substring(0, str.length() - 1) + "]";
     }
 
     public static void main(String[] args){
@@ -124,16 +145,22 @@ public class DoublyLinkedList<E> implements List{
         list.add(10);
         list.add(20);
         list.add(30);
+        list.add(1, 30);
+        list.add(2, 40);
         System.out.println(list.toString()); // [10, 20, 30]
 
         System.out.println(list.size());
         System.out.println(list.isEmpty());
 
-        list.remove(30);
-        list.remove(20);
+        list.remove();
+        System.out.println(list.remove());
         System.out.println(list.toString());
 
-        /*list.add(2, 40);
+        list.set(0, 20);
+        System.out.println(list.get(0));
+        System.out.println(list.toString());
+
+        list.add(2, 40);
         list.add(0, 5);
         list.set(2, 50);
         System.out.println(list.toString()); // [5, 10, 50, 40, 30]
@@ -142,7 +169,5 @@ public class DoublyLinkedList<E> implements List{
         list.remove(2);
         System.out.println(list.size()); // 3
         System.out.println(list.toString()); // [5, 10, 40]
-
-         */
     }
 }

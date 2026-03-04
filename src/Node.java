@@ -42,7 +42,17 @@ public class Node<E> {
 
     @Override
     public String toString() {
-        return "Previous node: " + previous.getValue() + "Current node: " + value + "Next Node: " + next.getValue();
+        if (previous == null && next == null){
+            return value.toString();
+        }
+        else if (next == null){
+            return "Previous node: " + previous.getValue() + " Current node: " + value;
+
+        }
+        else if  (previous == null){
+            return "Current node: " + value + " Next node: " + next.getValue();
+        }
+        return "Previous node: " + previous.getValue() + "Current node: " + value + " Next Node: " + next.getValue();
     }
 
     public static void main(String[] args){
