@@ -33,20 +33,25 @@ public class DoublyLinkedList<E> implements List{
      */
     @Override
     public void add(int i, Object element) throws IndexOutOfBoundsException {
-        Node<E> temp = new Node<E>((E) element);
+        Node<E> newNode = new Node<E>((E) element);
         Node<E> current = head;
-        int pos = 0;
-        while(current.getNextNode() != null){
-            current = current.getNextNode();
-            pos++;
-            if(pos == i){
-                break;
-            }
+        if (i == 0){
+            newNode.setNextNode(head);
+            head.setPreviousNode(newNode);
+            head = newNode;
+            return;
         }
-        temp.setNextNode(current);
-        temp.setPreviousNode(current.getPreviousNode());
-        current.getPreviousNode().setNextNode(temp);
-        current.setPreviousNode(temp);
+        for(int pos = 0; pos < i - 1; pos++){
+            if (current == null){
+                throw new IndexOutOfBoundsException("Index out of bounds");
+            }
+            current = current.getNextNode();
+        }
+        newNode.setNextNode(current.getNextNode());
+        current.setNextNode(newNode);
+        current.setPreviousNode(newNode.getPreviousNode());
+        newNode.setPreviousNode(current.getPreviousNode());
+
     }
 
     /**
@@ -58,37 +63,57 @@ public class DoublyLinkedList<E> implements List{
             return null;
         }
         if(head.getNextNode() == null){
+            Node<E> temp = head;
             head = null;
+            return temp.getValue();
         }
         Node<E> current = head.getNextNode();
         while (current.getNextNode() != null){
             current = current.getNextNode();
         }
+        Node<E> temp = current;
         current.getPreviousNode().setNextNode(null);
 
-        return current.getValue();
+        return temp.getValue();
     }
 
-
+    /**
+     * Remove element at index i
+     * If index is invalid, throws IndexOutOfBoundsException
+     * @param i index of the element to remove
+     * @return the element that was removed
+     */
     @Override
     public Object remove(int i) throws IndexOutOfBoundsException {
+        E value = null;
         if (head == null){
             return null;
         }
-        Node<E> current = head.getNextNode();
-        for(int j = 0; j < i; j++){
-            if (current.getNextNode() == null){
-                break;
+        if (i == 0){
+            value = head.getValue();
+            head = head.getNextNode();
+            return value;
+        }
+        Node<E> current = head;
+        for(int j = 0; j < i - 1; j++){
+            if (current == null){
+                return null;
             }
             current = current.getNextNode();
         }
-        if (current.getPreviousNode() != null){
-            current.getPreviousNode().setNextNode(null);
-
+        if(current == null){
+            return null;
         }
-        return current.getValue();
+        current.setNextNode(current.getNextNode().getNextNode());
+        return value;
     }
 
+    /**
+     * Gets the element at index i
+     * If index is invalid, throws IndexOutOfBoundsException
+     * @param i index of the element
+     * @return the element
+     */
     @Override
     public E get(int i) throws IndexOutOfBoundsException {
         Node<E> current = head;
@@ -100,7 +125,12 @@ public class DoublyLinkedList<E> implements List{
         }
         return current.getValue();
     }
-
+    /**
+     * Sets the element at i to a new value
+     * If index is invalid, throws IndexOutOfBoundsException
+     * @param i index of the element to set
+     * @param element new value of the element
+     */
     @Override
     public void set(int i, Object element) throws IndexOutOfBoundsException {
         int pos = 0;
@@ -110,7 +140,10 @@ public class DoublyLinkedList<E> implements List{
         }
         current.setValue((E) element);
     }
-
+    /**
+     * Returns the size of the list
+     * @return the size of the list
+     */
     @Override
     public int size() {
         int size = 0;
@@ -122,9 +155,13 @@ public class DoublyLinkedList<E> implements List{
         return size;
     }
 
+    /**
+     * Prints out the list in the format [value1, value2, value3, …]
+     * @return a String of the list
+     */
     @Override
     public boolean isEmpty() {
-        return head == null && tail == null;
+        return head == null;
     }
 
     public String toString() {
@@ -141,33 +178,33 @@ public class DoublyLinkedList<E> implements List{
 
     public static void main(String[] args){
         DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
-        System.out.println(list.isEmpty());
+        System.out.println(list.isEmpty()); //true
         list.add(10);
         list.add(20);
         list.add(30);
         list.add(1, 30);
         list.add(2, 40);
-        System.out.println(list.toString()); // [10, 20, 30]
+        System.out.println(list.toString()); // [10, 30, 40, 20, 30]
 
-        System.out.println(list.size());
-        System.out.println(list.isEmpty());
+        System.out.println(list.size()); // 5
+        System.out.println(list.isEmpty()); // false
 
-        list.remove();
-        System.out.println(list.remove());
-        System.out.println(list.toString());
+        list.remove(); //removes 30
+        System.out.println(list.remove()); // 20
+        System.out.println(list.toString()); // [10, 30, 40]
 
         list.set(0, 20);
-        System.out.println(list.get(0));
-        System.out.println(list.toString());
+        System.out.println(list.get(0)); // 20
+        System.out.println(list.toString()); // [20, 30, 40]
 
-        list.add(2, 40);
-        list.add(0, 5);
-        list.set(2, 50);
-        System.out.println(list.toString()); // [5, 10, 50, 40, 30]
+        list.add(2, 40); // [20, 30, 40, 40]
+        list.add(0, 5); // [5, 20, 30, 40, 40]
+        list.set(2, 50); //[5, 20, 50, 40, 40]
+        System.out.println(list.toString());
 
         list.remove(4);
         list.remove(2);
         System.out.println(list.size()); // 3
-        System.out.println(list.toString()); // [5, 10, 40]
+        System.out.println(list.toString()); //[5, 20, 40]
     }
 }

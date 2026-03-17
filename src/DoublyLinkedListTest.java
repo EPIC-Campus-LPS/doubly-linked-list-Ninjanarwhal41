@@ -18,23 +18,33 @@ class DoublyLinkedListTest {
         list.add(2);
         list.add(1, 10);
         list.add(2, 20);
+        list.add(0, 30);
         assertEquals(10, list.get(1));
         assertEquals(20, list.get(2));
+        assertEquals(30, list.get(0));
     }
 
     @org.junit.jupiter.api.Test
     void remove() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+        list.add(10);
         list.add(20);
-        list.add(2);
-        assertEquals(2, list.remove());
+        list.add(30);
+        assertEquals(30, list.remove());
         assertEquals(20, list.remove());
+        assertEquals(10, list.remove());
+
+
     }
 
     @org.junit.jupiter.api.Test
     void testRemove() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
-        assertEquals(1, list.remove(0));
+        list.add(20);
+        list.add(2);
+        list.add(30);
+        assertEquals(2, list.remove(1));
+        assertEquals(30, list.remove(2));
     }
 
     @org.junit.jupiter.api.Test
