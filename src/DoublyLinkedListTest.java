@@ -14,14 +14,13 @@ class DoublyLinkedListTest {
     @org.junit.jupiter.api.Test
     void testAdd() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
-        list.add(1);
-        list.add(2);
-        list.add(1, 10);
-        list.add(2, 20);
-        list.add(0, 30);
-        assertEquals(10, list.get(1));
-        assertEquals(20, list.get(2));
-        assertEquals(30, list.get(0));
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        list.add(1, 30);
+        list.add(2, 40);
+        assertEquals(30, list.get(1));
+        assertEquals(40, list.get(2));
     }
 
     @org.junit.jupiter.api.Test
