@@ -1,0 +1,133 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > List</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: List (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">List</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;public interface List&lt;E&gt; {
+&nbsp;    /**
+&nbsp;     * Add an element to the end of the list
+&nbsp;     * @param element element to add to the list
+&nbsp;     */
+&nbsp;    public void add(E element);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add an element to the list at index i
+&nbsp;     * If index is invalid, throws IndexOutOfBoundsException
+&nbsp;     * @param i index of the element
+&nbsp;     * @param element element to add to the list
+&nbsp;     */
+&nbsp;    public void add(int i, E element) throws IndexOutOfBoundsException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the last element from the list
+&nbsp;     */
+&nbsp;    public E remove();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Remove element at index i
+&nbsp;     * If index is invalid, throws IndexOutOfBoundsException
+&nbsp;     * @param i index of the element to remove
+&nbsp;     * @return the element that was removed
+&nbsp;     */
+&nbsp;    public E remove(int i) throws IndexOutOfBoundsException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the element at index i
+&nbsp;     * If index is invalid, throws IndexOutOfBoundsException
+&nbsp;     * @param i index of the element
+&nbsp;     * @return the element
+&nbsp;     */
+&nbsp;    public E get(int i) throws IndexOutOfBoundsException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the element at i to a new value
+&nbsp;     * If index is invalid, throws IndexOutOfBoundsException
+&nbsp;     * @param i index of the element to set
+&nbsp;     * @param element new value of the element
+&nbsp;     */
+&nbsp;    public void set(int i, E element) throws IndexOutOfBoundsException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the size of the list
+&nbsp;     * @return the size of the list
+&nbsp;     */
+&nbsp;    public int size();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if the list is empty and false if there are elements
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public boolean isEmpty();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prints out the list in the format [value1, value2, value3, …]
+&nbsp;     * @return a String of the list
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String toString();
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-03-19 22:02</div>
+</div>
+</body>
+</html>

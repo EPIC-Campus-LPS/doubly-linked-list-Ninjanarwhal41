@@ -56,7 +56,7 @@ public class Node<E> {
     }
 
     public static void main(String[] args){
-        Node<String> first = new Node<>("obtuse");
+        /*Node<String> first = new Node<>("obtuse");
 
         Node<String> next = new Node<>("rubber goose");
         first.setNextNode(next);
@@ -67,6 +67,6 @@ public class Node<E> {
         System.out.println(after.getPreviousNode().getValue()); // "rubber goose"
 
         Node<String> last = new Node<>("giant snake");
-        System.out.println(next.equals(last));
+        System.out.println(next.equals(last)); */
     }
 }
